@@ -1,0 +1,86 @@
+<div class="card-header text-right">
+  جدولة المواقع
+
+
+</div>
+<div class="card-body container">
+  
+  <div class="row col">
+
+    
+
+
+
+
+    
+
+    <div *ngIf="showButtonSearch" class="d-flex container p-2 my-2 justify-content-center">
+      <!-- <label for="select"></label> -->
+      <button class="btn col-md-2 btn-primary" (click)="search()"> بحث
+        <span *ngIf="isLoading" class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
+      </button>
+    </div>
+
+
+  </div>
+  <br>
+  
+  <div *ngIf="!flag" class="col-12 text-right">
+    <span class="badge badge-pill badge-danger">&nbsp; </span>
+    <label>&nbsp; مجدول</label>
+
+    <label>&nbsp; &nbsp;|&nbsp; &nbsp;</label>
+
+    <span class="badge badge-pill badge-default">&nbsp; </span>
+    <label>&nbsp; ليس مجدول</label>
+
+    <label>&nbsp; &nbsp;|&nbsp; &nbsp;</label>
+
+    <span class="badge badge-pill badge-warning">&nbsp; </span>
+    <label>&nbsp; إعادة جدولة </label>
+  </div>
+
+  <!-- Table  -->
+  <div class="table-wrapper-scroll-y my-custom-scrollbar" >
+    <table class="table  table-bordered text-right">
+      <!-- Table head -->
+      {{resetCount()}}
+      <thead class=" text-center ">
+        <tr>
+
+          <th>الأحد</th>
+          <th>الأثنين</th>
+          <th>الثلاثاء</th>
+          <th>الأربعاء</th>
+          <th>الخميس</th>
+          <th>الجمعة</th>
+          <th>السبت</th>
+
+
+        </tr>
+      </thead>
+      <!-- Table head -->
+
+      <!-- Table body -->
+      <tbody>
+        <tr *ngFor="let week of weeks">
+
+          <td #td_tag class=" hoverable " *ngFor="let day of days">
+            <!-- print only the whole month  -->
+            <div *ngIf="(firstDay <= day || (week>0 ) ) && ( week<5 || lastDay >=day)"><input type="hidden"
+                name="{{(counter())}}">
+                <app-cells-items *ngIf="!flag"  [day]="counterDays" [month]="month"
+                [year]="year" [td]='td_tag' [dayWeek]='day'  (refreshSchedule)="search()">
+              </app-cells-items>
+            </div>
+          </td>
+
+        </tr>
+
+      </tbody>
+      <!-- Table body -->
+    </table>
+  </div>
+  <!-- Table  -->
+
+</div>
