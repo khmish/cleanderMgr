@@ -1,3 +1,4 @@
+import { SelectedDateService } from './../../services/selected-date.service';
 import {
   Component,
   Input,
@@ -34,41 +35,6 @@ export class CellsItemsComponent implements OnChanges {
   @Input() td; //colnumn of the selected cell
   @Input() dayWeek: number;
 
-  //location Setting
-
-
-  //Annual vacation
-  @Input() annualVacationStart: Date = null;
-  @Input() annualVacationEnd: Date = null;
-
-  //Half annual vacation
-  @Input() halfAnnualVacationStart: Date = null;
-  @Input() halfAnnualVacationEnd: Date = null;
-
-  //National vacation
-  @Input() nationalVacationStart: Date = null;
-  @Input() nationalVacationEnd: Date = null;
-
-  //ramadan
-  @Input() ramadanStart: Date = null;
-  @Input() ramadanEnd: Date = null;
-
-
-  //eid Adha
-  @Input() eidAdhaStart: Date = null;
-  @Input() eidAdhaEnd: Date = null;
-
-  //eid Fatr
-  @Input() eidFatrStart: Date = null;
-  @Input() eidFatrEnd: Date = null;
-
-  //Icon
-  annualVacationIcon: boolean = false;
-  halfAnnualVacationIcon: boolean = false;
-  ramadanIcon: boolean = false;
-  eidAdhaIcon: boolean = false;
-  eidFatrIcon: boolean = false;
-  nationalVacationIcon: boolean = false;
 
   badge_color: string = 'badge-default';
 
@@ -83,7 +49,7 @@ export class CellsItemsComponent implements OnChanges {
 
 
 
-  constructor( private requestService: HttpRequestService) //the service is for setting day in order to show it in cell detail
+  constructor(private selectedDateService: SelectedDateService, private requestService: HttpRequestService) //the service is for setting day in order to show it in cell detail
   {}
 
   refresh_Schedule() {
@@ -111,7 +77,9 @@ export class CellsItemsComponent implements OnChanges {
 
   setData() {
 
-    
+    this.selectedDateService.setDay(this.day);
+    this.selectedDateService.setMonth(this.month);
+    this.selectedDateService.setYear(this.year);
 
     //start:  Name of Day
     switch (this.dayWeek) {
@@ -131,50 +99,22 @@ export class CellsItemsComponent implements OnChanges {
 
 
 
-    this.getEmployeeAssign();
+   
 
   }
 
   //set and pass the selectd date values to selectedDateService
   onClick() {
+    this.setData();
+    
     
   }
 
-  getEmployeeAssign() {
-
-
-    // this.requestService.post(this.get_AllEmployeesAssignments_API_URL, this.locationAssignments)
-    //   .subscribe(async (result: Promise < LocationAssignmentsInfo[] > ) => {
-    //     if (result) {
-    //       const data =  await result;
-    //       data.forEach(x=>{
-    //         this.EmployeesAssignments.push(x);
-    //       })
-    //       this.selectedDateService.setEmployyeAssign(this.EmployeesAssignments);
-
-    //       this.locationSetting.ShiftNumber >= 1 ? this.getEmployeeAssignSelected(1) : '';
-    //       this.locationSetting.ShiftNumber >= 2 ? this.getEmployeeAssignSelected(2) : '';
-    //       this.locationSetting.ShiftNumber >= 3 ? this.getEmployeeAssignSelected(3) : '';
-    //       this.locationSetting.ShiftNumber >= 4 ? this.getEmployeeAssignSelected(4) : '';
-    //     }
-    //   });
-
-
-  }
-
-  
-
-
-  
+    
 
   busyDay() {
 
     const DateOfDay = this.year + '-' + this.month + '-' + this.day;
-    
-
-    
-    
-
       // if (length === 0) {
       //   this.badge_color = 'badge-default'; // لم يتم جدولة اليوم
       // } else if (totalAssign === length) {
@@ -185,6 +125,7 @@ export class CellsItemsComponent implements OnChanges {
     
 
   }
+ 
 
   CalenderBackgroundColor() {
     //change background current day 

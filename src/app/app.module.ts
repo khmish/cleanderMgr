@@ -1,3 +1,4 @@
+import { CellsDetailComponent } from './calender-table/cells-items/cells-detail/cells-detail.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,7 +12,8 @@ import { CellsItemsComponent } from './calender-table/cells-items/cells-items.co
   declarations: [
     AppComponent,
     CalenderTableComponent,
-    CellsItemsComponent
+    CellsItemsComponent,
+    CellsDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -180,7 +180,7 @@ export class CalenderTableComponent implements OnInit {
     this.yearDropDownList=(this.year);
     this.monthDropDownList=(this.month);
     // this.isAllowedMonth();
-
+    this.calendAdj();
     
   }
   //increment calender days in the table
@@ -258,22 +258,22 @@ export class CalenderTableComponent implements OnInit {
   //return only months from the current month on .. and disabled the previous months
   isAllowedMonth() {
 
-    const currentDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
+    // const currentDate = new Date(this.date.getFullYear(), this.date.getMonth(), 1);
 
-    for (let index = 0; index < this.months.length; index++) {
-      if (this.date.getFullYear() >= this.yearDropDownList.getSelected()) {
-        const selectDate = new Date(this.yearDropDownList.getSelected(), (this.months[index].ID - 1), 1);
+    // for (let index = 0; index < this.months.length; index++) {
+    //   if (this.date.getFullYear() >= this.yearDropDownList.getSelected()) {
+    //     const selectDate = new Date(this.yearDropDownList.getSelected(), (this.months[index].ID - 1), 1);
         
-        if ( selectDate < currentDate) {
-          this.months[index].disabled = true;
-        } else {
-          this.months[index].disabled = false;
-        }
-      } else {
-        this.months[index].disabled = false;
-      }
+    //     if ( selectDate < currentDate) {
+    //       this.months[index].disabled = true;
+    //     } else {
+    //       this.months[index].disabled = false;
+    //     }
+    //   } else {
+    //     this.months[index].disabled = false;
+    //   }
 
-    }
+    // }
 
   }
 

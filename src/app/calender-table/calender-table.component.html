@@ -1,48 +1,33 @@
-<div class="card-header text-right">
-  جدولة المواقع
-
-
-</div>
-<div class="card-body container">
-  
-  <div class="row col">
-
-    
-
-
-
-
-    
-
-    <div *ngIf="showButtonSearch" class="d-flex container p-2 my-2 justify-content-center">
+<div class="card">
+  <h5 class="card-header h5">Featured</h5>
+  <div class="card-body">
+    <div class="d-flex container p-2 my-2 justify-content-center">
       <!-- <label for="select"></label> -->
       <button class="btn col-md-2 btn-primary" (click)="search()"> بحث
         <span *ngIf="isLoading" class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
       </button>
     </div>
+    <div class="col-12 text-right">
+      <span class="badge badge-pill badge-danger">&nbsp; </span>
+      <label>&nbsp; مجدول</label>
 
+      <label>&nbsp; &nbsp;|&nbsp; &nbsp;</label>
 
-  </div>
-  <br>
+      <span class="badge badge-pill badge-default">&nbsp; </span>
+      <label>&nbsp; ليس مجدول</label>
+
+      <label>&nbsp; &nbsp;|&nbsp; &nbsp;</label>
+
+      <span class="badge badge-pill badge-warning">&nbsp; </span>
+      <label>&nbsp; إعادة جدولة </label>
+    </div>
+
   
-  <div *ngIf="!flag" class="col-12 text-right">
-    <span class="badge badge-pill badge-danger">&nbsp; </span>
-    <label>&nbsp; مجدول</label>
-
-    <label>&nbsp; &nbsp;|&nbsp; &nbsp;</label>
-
-    <span class="badge badge-pill badge-default">&nbsp; </span>
-    <label>&nbsp; ليس مجدول</label>
-
-    <label>&nbsp; &nbsp;|&nbsp; &nbsp;</label>
-
-    <span class="badge badge-pill badge-warning">&nbsp; </span>
-    <label>&nbsp; إعادة جدولة </label>
-  </div>
-
+  <br>
   <!-- Table  -->
-  <div class="table-wrapper-scroll-y my-custom-scrollbar" >
+  <div class="table-responsive">
     <table class="table  table-bordered text-right">
+
       <!-- Table head -->
       {{resetCount()}}
       <thead class=" text-center ">
@@ -67,10 +52,10 @@
 
           <td #td_tag class=" hoverable " *ngFor="let day of days">
             <!-- print only the whole month  -->
-            <div *ngIf="(firstDay <= day || (week>0 ) ) && ( week<5 || lastDay >=day)"><input type="hidden"
-                name="{{(counter())}}">
-                <app-cells-items *ngIf="!flag"  [day]="counterDays" [month]="month"
-                [year]="year" [td]='td_tag' [dayWeek]='day'  (refreshSchedule)="search()">
+            <div *ngIf="(firstDay <= day || (week>0 ) ) && ( week<5 || lastDay >=day) && (counterDays<=totalDays)">
+              <input type="hidden" name="{{(counter())}}">
+              <app-cells-items [day]="counterDays" [month]="month" [year]="year" [td]='td_tag' [dayWeek]='day'
+                (refreshSchedule)="search()">
               </app-cells-items>
             </div>
           </td>
@@ -82,5 +67,5 @@
     </table>
   </div>
   <!-- Table  -->
-
+</div>
 </div>
