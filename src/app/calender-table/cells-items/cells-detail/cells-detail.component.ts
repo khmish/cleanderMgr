@@ -75,7 +75,7 @@ export class CellsDetailComponent implements OnInit {
     //get from selectedDateService the selected year
     this.selectedDateService.getYear()
       .subscribe((year: number) => this.yearNum = year);
-console.log(this.yearNum+" /"+this.monthNum+" /"+this.dayNum);
+
 
   }
 

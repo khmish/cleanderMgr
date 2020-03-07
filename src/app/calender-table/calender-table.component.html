@@ -3,7 +3,7 @@
   <div class="card-body">
     <div class="d-flex container p-2 my-2 justify-content-center">
       <!-- <label for="select"></label> -->
-      <button class="btn col-md-2 btn-primary" (click)="search()"> بحث
+      <button class="btn col-md-2 btn-primary" (click)="updateFlag()"> بحث
         <span *ngIf="isLoading" class="spinner-border spinner-border-lg" role="status" aria-hidden="true"></span>
       </button>
     </div>
@@ -25,7 +25,8 @@
   
   <br>
   <!-- Table  -->
-  <div class="table-responsive">
+  <ng-container *ngIf="flag==1; else elseTemplate">
+     <div class="table-responsive" > 
     <table class="table  table-bordered text-right">
 
       <!-- Table head -->
@@ -54,7 +55,7 @@
             <!-- print only the whole month  -->
             <div *ngIf="(firstDay <= day || (week>0 ) ) && ( week<5 || lastDay >=day) && (counterDays<=totalDays)">
               <input type="hidden" name="{{(counter())}}">
-              <app-cells-items [day]="counterDays" [month]="month" [year]="year" [td]='td_tag' [dayWeek]='day'
+              <app-cells-items [cleanderEvent]="clndrEvntarry[countNum]" [day]="counterDays" [month]="month" [year]="year" [td]='td_tag' [dayWeek]='day'
                 (refreshSchedule)="search()">
               </app-cells-items>
             </div>
@@ -66,6 +67,12 @@
       <!-- Table body -->
     </table>
   </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    
+  </ng-template>
+  
+ 
   <!-- Table  -->
 </div>
 </div>

@@ -18,7 +18,7 @@ import {
 })
 export class HttpRequestService {
 
-  private baseUrl: string = '';//environment.apiUrl;
+  private baseUrl: string = 'http://localhost/CleanderMgrP/public/api/';//environment.apiUrl;
 
 
   constructor(public httpClient: HttpClient) {}

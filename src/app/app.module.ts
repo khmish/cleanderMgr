@@ -18,7 +18,8 @@ import { CellsItemsComponent } from './calender-table/cells-items/cells-items.co
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

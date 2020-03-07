@@ -15,6 +15,7 @@ import {
 import {
   map
 } from 'rxjs/operators';
+import { CleanderEvent } from 'src/app/models/cleander-event';
 
 
 @Component({
@@ -34,7 +35,7 @@ export class CellsItemsComponent implements OnChanges {
   @Input() year: number;
   @Input() td; //colnumn of the selected cell
   @Input() dayWeek: number;
-
+  @Input() cleanderEvent: CleanderEvent;//={id:1,user:1, state:0,date:null};
 
   badge_color: string = 'badge-default';
 
@@ -50,7 +51,7 @@ export class CellsItemsComponent implements OnChanges {
 
 
   constructor(private selectedDateService: SelectedDateService, private requestService: HttpRequestService) //the service is for setting day in order to show it in cell detail
-  {}
+  { }
 
   refresh_Schedule() {
     this.refreshSchedule.emit();
@@ -61,13 +62,18 @@ export class CellsItemsComponent implements OnChanges {
 
   }
 
-  
+
 
 
   ngOnChanges(): void {
     this.CalenderBackgroundColor();
     //Enable or Disable icon
     this.busyDay();
+  }
+  ngOnInit() {
+    // console.log(this.cleanderEvent);
+    
+    
   }
 
   ngOnDestroy(): void {
@@ -76,6 +82,7 @@ export class CellsItemsComponent implements OnChanges {
   }
 
   setData() {
+    console.log(this.cleanderEvent);
 
     this.selectedDateService.setDay(this.day);
     this.selectedDateService.setMonth(this.month);
@@ -99,33 +106,34 @@ export class CellsItemsComponent implements OnChanges {
 
 
 
-   
+
 
   }
 
   //set and pass the selectd date values to selectedDateService
   onClick() {
     this.setData();
-    
-    
+
+
   }
 
-    
+
 
   busyDay() {
 
     const DateOfDay = this.year + '-' + this.month + '-' + this.day;
-      // if (length === 0) {
-      //   this.badge_color = 'badge-default'; // لم يتم جدولة اليوم
-      // } else if (totalAssign === length) {
-      //   this.badge_color = 'badge-danger'; // تم جدولة اليوم مسبقا
-      // } else {
-      //   this.badge_color = 'badge-warning'; // اعادة جدولة اليوم
-      // }
-    
+    if (this.cleanderEvent) {
+      if (this.cleanderEvent.state === 0) {
+        this.badge_color = 'badge-default'; // لم يتم جدولة اليوم
+      } else if (this.cleanderEvent.state === 1) {
+        this.badge_color = 'badge-danger'; // تم جدولة اليوم مسبقا
+      } else {
+        this.badge_color = 'badge-warning'; // اعادة جدولة اليوم
+      }
+    }
 
   }
- 
+
 
   CalenderBackgroundColor() {
     //change background current day 
@@ -142,7 +150,7 @@ export class CellsItemsComponent implements OnChanges {
     }
   }
 
-  
+
 
   isBetween(startDate: Date, endDate: Date, date: Date) {
     if (date >= startDate && date <= endDate) {
