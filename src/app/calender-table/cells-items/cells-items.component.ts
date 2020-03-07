@@ -56,7 +56,7 @@ export class CellsItemsComponent implements OnChanges {
   { }
 
   refresh_Schedule() {
-    console.log("emit cell item");
+    // console.log("emit cell item");
     
     this.refreshSchedule.emit();
     
@@ -90,7 +90,7 @@ export class CellsItemsComponent implements OnChanges {
     sessionStorage.month=this.month;
     sessionStorage.year=this.year;
     sessionStorage.cleanderEvent=this.cleanderEvent.id;
-    console.log(sessionStorage.cleanderEvent);
+    // console.log(sessionStorage.cleanderEvent);
     
     //start:  Name of Day
     switch (this.dayWeek) {
