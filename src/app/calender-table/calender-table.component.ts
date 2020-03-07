@@ -87,12 +87,13 @@ export class CalenderTableComponent implements OnInit {
     if (this.counterDays == this.totalDays) {
       // this.flag = 1; //disable schedule
     }
-  this.countNum=this.counterDays;
+  this.countNum++;
 
     return this.counterDays++;
   }
   resetCount() {
     // this.flag = 0; //enable schedule
+    this.countNum=0;
     this.counterDays = 1; //disable schedule
 
   }
@@ -140,11 +141,8 @@ export class CalenderTableComponent implements OnInit {
         })).toPromise();
   }
   updateFlag(){
-    this.flag=0;
-    setTimeout(function(){ 
-       this.flag=1;
-       }, 1000);
-       this.flag=1;
+    this.flag=(this.flag==0)?1:0;
+    
   }
 
 }

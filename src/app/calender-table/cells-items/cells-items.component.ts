@@ -55,6 +55,7 @@ export class CellsItemsComponent implements OnChanges {
 
   refresh_Schedule() {
     this.refreshSchedule.emit();
+    
   }
 
   isClickableDay() {
@@ -68,6 +69,7 @@ export class CellsItemsComponent implements OnChanges {
   ngOnChanges(): void {
     this.CalenderBackgroundColor();
     //Enable or Disable icon
+    
     this.busyDay();
   }
   ngOnInit() {
@@ -78,11 +80,12 @@ export class CellsItemsComponent implements OnChanges {
 
   ngOnDestroy(): void {
     //default background
-    this.td.style.background = '#ffffff';
+    // this.td.style.background = '#ffffff';
+    this.td.style.border="0px solid black";
   }
 
   setData() {
-    console.log(this.cleanderEvent);
+    this.td.style.border= "2px solid black";
 
     this.selectedDateService.setDay(this.day);
     this.selectedDateService.setMonth(this.month);
