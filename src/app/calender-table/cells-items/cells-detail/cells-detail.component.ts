@@ -1,3 +1,4 @@
+import { EventItem } from 'src/app/models/event-item';
 import {
   Component,
   OnInit,
@@ -19,48 +20,53 @@ import { SelectedDateService } from 'src/app/services/selected-date.service';
 })
 export class CellsDetailComponent implements OnInit {
 
-  add_LocationAssignment_API_URL = 'SecuritySystemAPI/LocationAssignments/AddLocationAssignment/';
-  update_LocationAssignment_API_URL = 'SecuritySystemAPI/LocationAssignments/UpdateLocationAssignment/';
 
-  @Output() is_Save = new EventEmitter();
+  URL = 'events/';
 
-  
+  @Output() is_Save: EventEmitter<number> = new EventEmitter<number>();
 
+  events: EventItem[] = [];
 
-  
   button_label = 'حفظ';
 
   isSave: boolean = true;
 
-  MessegeShown: boolean = false;
-  MessegeType: number = -1;
-  MessegeBody: string = "";
-  MessegeTime: number = 5000;
 
+  dayNum: number = sessionStorage.day; //value of selected day
+  monthNum: number = sessionStorage.month; //value of selected month
+  yearNum: number = sessionStorage.year; //value of selected year
 
+  cleanderId: number = sessionStorage.cleanderEvent;
 
-  dayNum: number; //value of selected day
-  monthNum: number; //value of selected month
-  yearNum: number; //value of selected year
+  flag = 0;
+  subscription: any;
 
-  
+  constructor(private selectedDateService: SelectedDateService, private requestService: HttpRequestService) {
 
-
-
-  constructor(private selectedDateService: SelectedDateService, private requestService: HttpRequestService) {}
+  }
 
   onClose() {
     // this.is_Save.emit(this.yearNum + '-' + this.monthNum + '-' + this.dayNum);
-   
-    this.is_Save.emit();
-    
+    // console.log("emit cell detail");
+
+    this.is_Save.emit(1);
+    sessionStorage.closed = 1;
     this.isSave = true;
   }
 
+
   ngOnInit() {
     this.getDataForSelectedDay();
-  }
+    // console.log('detail ' + this.cleanderId);
 
+  }
+  ngOnChanges(): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+    this.getDataForSelectedDay();
+
+
+  }
 
   getDataForSelectedDay() {
 
@@ -75,19 +81,34 @@ export class CellsDetailComponent implements OnInit {
     //get from selectedDateService the selected year
     this.selectedDateService.getYear()
       .subscribe((year: number) => this.yearNum = year);
+    // this.selectedDateService.getCleanderId()
+    //   .subscribe((cid:number)=> {
+    //     this.cleanderId=cid;
+
+    //   });
+    let id = sessionStorage.cleanderEvent;
+    // console.log(id);
+
+    this.subscription = this.requestService.get(this.URL + id).subscribe((data: EventItem[]) => {
+      this.events = data;
+      // console.log("geting events");
+
+      this.flag = 1;
+      return data;
+    });
 
 
   }
 
-  
-
-
-  
-  
-
- 
 
 
 
-  
+
+
+
+
+
+
+
+
 }

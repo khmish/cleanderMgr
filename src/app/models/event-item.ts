@@ -1,6 +1,6 @@
 import { Time } from '@angular/common';
 
-export class Event {
+export class EventItem {
     id?:number;
     cleanderId:number;
     time:Time;

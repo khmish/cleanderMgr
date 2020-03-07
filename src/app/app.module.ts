@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CalenderTableComponent } from './calender-table/calender-table.component';
 import { CellsItemsComponent } from './calender-table/cells-items/cells-items.component';
+import { TimeReservationComponent } from './calender-table/cells-items/cells-detail/time-reservation/time-reservation.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { CellsItemsComponent } from './calender-table/cells-items/cells-items.co
     CalenderTableComponent,
     CellsItemsComponent,
     CellsDetailComponent,
+    TimeReservationComponent,
   ],
   imports: [
     BrowserModule,

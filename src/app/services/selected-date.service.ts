@@ -11,6 +11,7 @@ export class SelectedDateService {
   day: EventEmitter < number > = new EventEmitter();
   month: EventEmitter < number > = new EventEmitter();
   year: EventEmitter < number > = new EventEmitter();
+  cleanderId: EventEmitter < number > = new EventEmitter();
  
 
 
@@ -37,6 +38,12 @@ export class SelectedDateService {
   }
   getYear() {
     return this.year;
+  }
+  setCleanderId(cleanderId: number) {
+    this.cleanderId.emit(cleanderId);
+  }
+  getCleanderId() {
+    return this.cleanderId;
   }
 
 }

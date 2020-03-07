@@ -25,7 +25,7 @@ import { CleanderEvent } from 'src/app/models/cleander-event';
 })
 export class CellsItemsComponent implements OnChanges {
 
-  get_AllEmployeesAssignments_API_URL = 'SecuritySystemAPI/LocationAssignments/GetAllEmployeesAssignments/';
+  url = '';
 
   @Output() refreshSchedule = new EventEmitter();
 
@@ -48,19 +48,21 @@ export class CellsItemsComponent implements OnChanges {
   NameOfDay = '';
   TypeOfDay = '';
 
+  isOpen=0;
+
 
 
   constructor(private selectedDateService: SelectedDateService, private requestService: HttpRequestService) //the service is for setting day in order to show it in cell detail
   { }
 
   refresh_Schedule() {
+    console.log("emit cell item");
+    
     this.refreshSchedule.emit();
     
   }
 
   isClickableDay() {
-
-
   }
 
 
@@ -68,29 +70,28 @@ export class CellsItemsComponent implements OnChanges {
 
   ngOnChanges(): void {
     this.CalenderBackgroundColor();
-    //Enable or Disable icon
-    
     this.busyDay();
   }
   ngOnInit() {
-    // console.log(this.cleanderEvent);
-    
-    
   }
 
   ngOnDestroy(): void {
     //default background
     // this.td.style.background = '#ffffff';
-    this.td.style.border="0px solid black";
+    // this.td.style.border="0px solid black";
   }
 
   setData() {
-    this.td.style.border= "2px solid black";
-
     this.selectedDateService.setDay(this.day);
     this.selectedDateService.setMonth(this.month);
     this.selectedDateService.setYear(this.year);
-
+    // this.selectedDateService.setCleanderId(this.cleanderEvent.id);
+    sessionStorage.day=this.day;
+    sessionStorage.month=this.month;
+    sessionStorage.year=this.year;
+    sessionStorage.cleanderEvent=this.cleanderEvent.id;
+    console.log(sessionStorage.cleanderEvent);
+    
     //start:  Name of Day
     switch (this.dayWeek) {
       case 5:
@@ -106,17 +107,12 @@ export class CellsItemsComponent implements OnChanges {
         break;
     }
     //end: Name of Day
-
-
-
-
-
   }
 
   //set and pass the selectd date values to selectedDateService
   onClick() {
     this.setData();
-
+    this.isOpen=1;
 
   }
 

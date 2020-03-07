@@ -10,4 +10,4 @@ data-toggle="modal" >
 
 
 </a>
-<app-cells-detail (is_Save)="refresh_Schedule()"></app-cells-detail>
+<app-cells-detail (is_Save)="refresh_Schedule()" *ngIf="isOpen"></app-cells-detail>

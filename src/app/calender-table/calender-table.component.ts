@@ -129,13 +129,10 @@ export class CalenderTableComponent implements OnInit {
 
   //search by month and year and pass parameter to cell detail component 
   search() {
+    
+    
     return this.requestService.get(this.url ).pipe(map((data: CleanderEvent[]) => {
-      
       this.clndrEvntarry=data;
-      // console.log(this.clndrEvntarry);
-      
-      // setTimeout(function(){ 
-      //  }, 1000);
       this.flag = 1;
           return data
         })).toPromise();
@@ -143,6 +140,13 @@ export class CalenderTableComponent implements OnInit {
   updateFlag(){
     this.flag=(this.flag==0)?1:0;
     
+  }
+  refreshPag()
+  {
+    this.flag =0;
+    setTimeout(() => {
+      this.flag = 1;
+    }, 300);
   }
 
 }

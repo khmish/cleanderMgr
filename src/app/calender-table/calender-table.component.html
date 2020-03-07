@@ -9,17 +9,17 @@
     </div>
     <div class="col-12 text-right">
       <span class="badge badge-pill badge-danger">&nbsp; </span>
-      <label>&nbsp; مجدول</label>
+      <label>&nbsp; محجوز</label>
 
       <label>&nbsp; &nbsp;|&nbsp; &nbsp;</label>
 
       <span class="badge badge-pill badge-default">&nbsp; </span>
-      <label>&nbsp; ليس مجدول</label>
+      <label>&nbsp; متوفر</label>
 
       <label>&nbsp; &nbsp;|&nbsp; &nbsp;</label>
 
       <span class="badge badge-pill badge-warning">&nbsp; </span>
-      <label>&nbsp; إعادة جدولة </label>
+      <label>&nbsp; متوفر جزئيا </label>
     </div>
 
   
@@ -56,7 +56,7 @@
             <div *ngIf="(firstDay <= day || (week>0 ) ) && ( week<5 || lastDay >=day) && (counterDays<=totalDays)">
               <input type="hidden" name="{{(counter())}}">
               <app-cells-items [cleanderEvent]="clndrEvntarry[countNum]" [day]="counterDays" [month]="month" [year]="year" [td]='td_tag' [dayWeek]='day'
-                (refreshSchedule)="search()">
+                (refreshSchedule)="refreshPag()">
               </app-cells-items>
             </div>
           </td>

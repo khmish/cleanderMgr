@@ -9,11 +9,13 @@
         </button>
         <h5 class="modal-title" id="exampleModalPreviewLabel">{{yearNum}} - {{monthNum}} - {{dayNum}}</h5>
       </div>
-      <div class="modal-body text-center">
-        ...
+      <div class="modal-body text-center" *ngIf="flag">
+        <div *ngFor="let evnt of events; let i=index">
+          <app-time-reservation [eventItem]="evnt" ></app-time-reservation>
+        </div>
       </div>
       <div class="modal-footer  justify-content-center">
-        <button type="button" class="btn btn-block btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-block btn-secondary" (click)="onClose()" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-block btn-primary">Save changes</button>
       </div>
     </div>
