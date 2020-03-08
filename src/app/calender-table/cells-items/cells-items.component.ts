@@ -55,10 +55,13 @@ export class CellsItemsComponent implements OnChanges {
   constructor(private selectedDateService: SelectedDateService, private requestService: HttpRequestService) //the service is for setting day in order to show it in cell detail
   { }
 
-  refresh_Schedule() {
+  refresh_Schedule(evnt) {
     // console.log("emit cell item");
-    
-    this.refreshSchedule.emit();
+    if(evnt==1)
+      this.refreshSchedule.emit();
+    else{
+      
+    }
     
   }
 

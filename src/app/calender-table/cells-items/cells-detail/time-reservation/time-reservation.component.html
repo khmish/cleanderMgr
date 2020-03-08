@@ -3,7 +3,7 @@
     <h5 class="card-title">{{eventItem.time}}</h5>
     <h6 class="card-subtitle mb-2 text-muted"></h6>
     <p class="card-text"></p>
-    <a class="{{allowed}}">{{allowedName}}</a>
+    <button class="{{allowed}}" (click)="reserve()">{{allowedName}}</button>
     <!-- <a class="card-link">Another link</a> -->
   </div>
 </div>

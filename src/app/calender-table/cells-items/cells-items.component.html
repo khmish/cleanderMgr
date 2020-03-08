@@ -10,4 +10,7 @@ data-toggle="modal" >
 
 
 </a>
-<app-cells-detail (is_Save)="refresh_Schedule()" *ngIf="isOpen"></app-cells-detail>
+<div *ngIf="isOpen">
+
+  <app-cells-detail (is_Save)="refresh_Schedule($event)" ></app-cells-detail>
+</div>

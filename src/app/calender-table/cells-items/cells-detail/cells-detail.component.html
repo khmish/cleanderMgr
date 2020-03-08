@@ -11,7 +11,7 @@
       </div>
       <div class="modal-body text-center" *ngIf="flag">
         <div *ngFor="let evnt of events; let i=index">
-          <app-time-reservation [eventItem]="evnt" ></app-time-reservation>
+          <app-time-reservation [eventItem]="evnt" (saved)="savedTime()" ></app-time-reservation>
         </div>
       </div>
       <div class="modal-footer  justify-content-center">

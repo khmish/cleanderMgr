@@ -104,7 +104,20 @@ export class CellsDetailComponent implements OnInit {
 
 
 
-
+  savedTime(){
+    // this.flag=
+    
+    // this.is_Save.emit(2);
+    this.getDataForSelectedDay();
+    this. refreshPag();
+  }
+  refreshPag()
+  {
+    this.flag =0;
+    setTimeout(() => {
+      this.flag = 1;
+    }, 100);
+  }
 
 
 
