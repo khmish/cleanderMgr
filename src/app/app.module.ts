@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { CalenderTableComponent } from './calender-table/calender-table.component';
 import { CellsItemsComponent } from './calender-table/cells-items/cells-items.component';
 import { TimeReservationComponent } from './calender-table/cells-items/cells-detail/time-reservation/time-reservation.component';
+import { LoadingScreenComponent } from './common/loading-screen/loading-screen.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { TimeReservationComponent } from './calender-table/cells-items/cells-det
     CellsItemsComponent,
     CellsDetailComponent,
     TimeReservationComponent,
+    LoadingScreenComponent,
   ],
   imports: [
     BrowserModule,

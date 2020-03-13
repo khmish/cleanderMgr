@@ -36,8 +36,10 @@ export class CellsDetailComponent implements OnInit {
   monthNum: number = sessionStorage.month; //value of selected month
   yearNum: number = sessionStorage.year; //value of selected year
 
-  cleanderId: number = sessionStorage.cleanderEvent;
 
+  cleanderId: number = sessionStorage.cleanderEvent;//
+
+  //to refresh the current page
   flag = 0;
   subscription: any;
 
@@ -45,10 +47,8 @@ export class CellsDetailComponent implements OnInit {
 
   }
 
+  // send back an emit to parents components to refresh the cleander================================================
   onClose() {
-    // this.is_Save.emit(this.yearNum + '-' + this.monthNum + '-' + this.dayNum);
-    // console.log("emit cell detail");
-
     this.is_Save.emit(1);
     sessionStorage.closed = 1;
     this.isSave = true;
@@ -68,6 +68,7 @@ export class CellsDetailComponent implements OnInit {
 
   }
 
+  // fetch the data that came from calender table component======================================
   getDataForSelectedDay() {
 
     //get from selectedDateService the selected day
@@ -81,17 +82,16 @@ export class CellsDetailComponent implements OnInit {
     //get from selectedDateService the selected year
     this.selectedDateService.getYear()
       .subscribe((year: number) => this.yearNum = year);
-    // this.selectedDateService.getCleanderId()
-    //   .subscribe((cid:number)=> {
-    //     this.cleanderId=cid;
-
-    //   });
+    
+      //return the id for a day in session to use it to get all events for that id 'id==day'
     let id = sessionStorage.cleanderEvent;
     // console.log(id);
 
+    //use webservice to get the events
     this.subscription = this.requestService.get(this.URL + id).subscribe((data: EventItem[]) => {
+      //events
       this.events = data;
-      // console.log("geting events");
+     
 
       this.flag = 1;
       return data;
@@ -103,7 +103,7 @@ export class CellsDetailComponent implements OnInit {
 
 
 
-
+  //refresh the page when the time reservation compoenets emit!=================================
   savedTime(){
     // this.flag=
     

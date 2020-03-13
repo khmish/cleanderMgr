@@ -9,7 +9,9 @@ import { HttpRequestService } from 'src/app/services/http-request.service';
 export class TimeReservationComponent implements OnInit {
   constructor(private requestService: HttpRequestService) { }
   isSaved=0;
+
   url="reserved/";
+  
   @Output() saved: EventEmitter<number> = new EventEmitter<number>();
 
   @Input() eventItem: EventItem;//={id:0,state:0,time:null,cleanderId:0};
@@ -29,6 +31,7 @@ ngOnInit(): void {
     this.allowedName=(this.eventItem.state==0)?this.resrveBtnName[0]:this.resrveBtnName[1];
   }
 
+  //save the selected date and send the emit to cells detail components=============================
   reserve()
   {
     console.log(this.eventItem.id);
@@ -39,7 +42,7 @@ ngOnInit(): void {
       {
         console.log("the data " +this.eventItem.id+ " is saved");
         this.isSaved=1;
-        this.saved.emit();
+        this.saved.emit();// emit=============================================
       return data;
         
       }
