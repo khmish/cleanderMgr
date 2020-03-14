@@ -15,25 +15,29 @@ export class TimeReservationComponent implements OnInit {
   @Output() saved: EventEmitter<number> = new EventEmitter<number>();
 
   @Input() eventItem: EventItem;//={id:0,state:0,time:null,cleanderId:0};
+  timeItem:Date;
 
-  resrveBtnStyle=['btn btn-primary','btn btn-danger disabled'];
-  resrveBtnName=['حجز','غير متوفر'];
+  resrveBtnStyle=['btn  btn-sm btn-primary','btn  btn-sm btn-danger disabled'];
+  resrveBtnName=['حجز','محجوز'];
   allowed=this.resrveBtnStyle[0];
   allowedName=this.resrveBtnName[0];
 ngOnInit(): void {
     // console.log(this.allowed);
     this.isSaved=0;
+    this.timeItem=new Date("2020-02-30 "+this.eventItem.time);
   }
   ngAfterViewChecked(): void {
     //Called after every check of the component's view. Applies to components only.
     //Add 'implements AfterViewChecked' to the class.
     this.allowed=(this.eventItem.state==0)?this.resrveBtnStyle[0]:this.resrveBtnStyle[1];
     this.allowedName=(this.eventItem.state==0)?this.resrveBtnName[0]:this.resrveBtnName[1];
+
   }
 
   //save the selected date and send the emit to cells detail components=============================
   reserve()
   {
+    
     console.log(this.eventItem.id);
      this.requestService.get(this.url + this.eventItem.id).subscribe((data: any) => {
        console.log(data);

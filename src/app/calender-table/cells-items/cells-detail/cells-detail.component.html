@@ -1,7 +1,7 @@
 <!-- Modal -->
 <div class="modal fade right" id="modalQuickView" tabindex="-1" role="dialog" aria-labelledby="exampleModalPreviewLabel"
   aria-hidden="true">
-  <div class="modal-dialog modal-full-height modal-right" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" (click)="onClose()" aria-label="Close">
@@ -11,8 +11,8 @@
       </div>
       <app-loading-screen *ngIf="flag==0"></app-loading-screen>
 
-      <div class="modal-body text-center" *ngIf="flag">
-        <div *ngFor="let evnt of events; let i=index">
+      <div class="modal-body text-center row" *ngIf="flag" >
+        <div *ngFor="let evnt of events; let i=index" class="col-md-2 col-4">
           <app-time-reservation [eventItem]="evnt" (saved)="savedTime()" ></app-time-reservation>
         </div>
       </div>
